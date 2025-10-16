@@ -15,9 +15,9 @@ export function ConnectWalletButton() {
     >
       <Button
         onClick={() => open()}
-        className="px-8 py-6 bg-[#00FF99] text-black font-bold text-lg rounded-lg shadow-[0_0_25px_rgba(0,255,153,0.6)] hover:bg-white hover:shadow-[0_0_35px_rgba(0,255,153,0.8)] transition-all duration-300"
+        className="px-10 py-7 bg-[#00FF99] text-black font-bold text-xl rounded-lg shadow-[0_0_25px_rgba(0,255,153,0.6)] hover:bg-white hover:shadow-[0_0_35px_rgba(0,255,153,0.8)] transition-all duration-300 font-mono"
       >
-        Connect Sovereign Wallet
+        CONNECT SOVEREIGN WALLET
       </Button>
     </motion.div>
   );

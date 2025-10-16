@@ -1,36 +1,184 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Axiom Genesis Terminal — Renderer Process
 
-## Getting Started
+**@AxiomHive • @DevdollzAi**  
+*SUPRAPROTOCOL V∞ (ORACLE KERNEL)*
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Overview
+
+This directory contains the **Next.js 15 renderer process** for the Axiom Genesis Desktop Terminal. Built with cutting-edge Web3 technologies and NFT-grade UI/UX design, this is the sovereign interface for on-chain command execution.
+
+### Stack
+
+- **Next.js 15.5** with App Router & Turbopack
+- **React 19.1** with concurrent features
+- **TypeScript 5** with strict mode
+- **Tailwind CSS 4** with custom design token system
+- **shadcn/ui** components (New York style)
+- **Framer Motion 12** for branded animation system
+- **wagmi 2.18** for Ethereum interactions
+- **Web3Modal 5.1** for universal wallet connectivity
+- **Lucide React** for iconography
+
+---
+
+## Design System
+
+### Axiom Design Tokens
+
+All visual elements are governed by the **Axiom Design Token System** (`design-tokens.ts`):
+
+- **Color Palette:** Matrix-inspired (primary: #00FF99, secondary: #00FFFF, tertiary: #FF00FF)
+- **Typography:** Perfect fourth scale (1.25 ratio), Inter Sans + JetBrains Mono
+- **Spacing:** 4px base unit, exponential scale
+- **Shadows:** Glow effects for all interactive elements
+- **Animation:** Systematic durations (100ms-1000ms) with branded easing curves
+
+### Visual Effects
+
+- **Glassmorphism:** `<GlassPanel>` component with multiple opacity variants
+- **Particle Field:** Ambient background animation with connected nodes
+- **Scan-Line Effect:** Terminal-style overlay (8s loop)
+- **Glow States:** All buttons/cards have hover glow effects
+
+---
+
+## Component Library
+
+### Core UI Components
+
+- `<GlassPanel>` — Glassmorphic container with glow variants
+- `<ParticleField>` — Ambient particle animation system
+- `<Toast>` — Professional notification system (replaces alert())
+- `<CommandPalette>` — Keyboard-driven command interface (Ctrl+K)
+- `<ConnectWalletButton>` — Web3Modal wallet connection
+- `<GenesisCommandInterface>` — Main contract deployment UI
+
+### Utility Components
+
+- `<ThemeProvider>` — Dark mode system
+- `<Web3Provider>` — wagmi + Web3Modal configuration
+
+---
+
+## Development
+
+### Prerequisites
+
+```pwsh
+# From project root, install renderer dependencies
+cd renderer
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### WalletConnect Configuration
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Get Project ID: [https://cloud.walletconnect.com](https://cloud.walletconnect.com)
+2. Create `.env.local`:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```env
+NEXT_PUBLIC_PROJECT_ID=your_walletconnect_project_id
+```
 
-## Learn More
+### Run Development Server
 
-To learn more about Next.js, take a look at the following resources:
+```pwsh
+npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Server starts at `http://localhost:3000` (auto-launched by Electron)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Lint Code
 
-## Deploy on Vercel
+```pwsh
+npm run lint
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Architecture
+
+### File Structure
+
+```
+renderer/
+├── app/
+│   ├── layout.tsx              # Root layout (Web3Provider, ThemeProvider)
+│   ├── page.tsx                # Main terminal UI (GenesisTerminal)
+│   ├── globals.css             # Design token CSS + global styles
+│   └── favicon.ico
+├── components/
+│   ├── ui/
+│   │   ├── glass-panel.tsx     # Glassmorphism component
+│   │   ├── particle-field.tsx  # Particle animation system
+│   │   ├── toast.tsx           # Toast notification system
+│   │   ├── command-palette.tsx # Command palette (Ctrl+K)
+│   │   ├── connect-wallet-button.tsx
+│   │   ├── genesis-command-interface.tsx
+│   │   ├── button.tsx          # shadcn button
+│   │   └── dialog.tsx          # shadcn dialog
+│   └── theme-provider.tsx      # next-themes wrapper
+├── lib/
+│   ├── web3-provider.tsx       # wagmi + Web3Modal config
+│   └── utils.ts                # cn() utility
+├── design-tokens.ts            # Comprehensive design token system
+├── next.config.ts
+├── tsconfig.json
+├── components.json             # shadcn/ui config
+└── package.json
+```
+
+### Data Flow
+
+1. **Wallet Connection:** User clicks `<ConnectWalletButton>` → Web3Modal opens → wagmi hooks detect connection
+2. **Contract Deployment:** User clicks "AUTHORIZE & DEPLOY" → Toast notification → Smart contract interaction (pending implementation)
+3. **Command Palette:** User presses `Ctrl+K` → `<CommandPalette>` opens → Keyboard navigation → Execute command
+
+---
+
+## Performance
+
+- **Turbopack:** Enabled for instant HMR
+- **Font Optimization:** Google Fonts auto-optimized via `next/font`
+- **Code Splitting:** Automatic route-based splitting
+- **Canvas-based Animations:** ParticleField uses hardware-accelerated canvas
+
+---
+
+## Branding
+
+All UI elements recursively embed **@AxiomHive** and **@DevdollzAi** branding:
+
+- Footer: `SUPRAPROTOCOL V∞ (ORACLE KERNEL) • @AxiomHive • @DevdollzAi`
+- Header: `AXIOM GENESIS TERMINAL`
+- Metadata: `"The final step is sovereignty."`
+
+Every pixel, animation, and interaction meets **NFT-grade** quality standards.
+
+---
+
+## Keyboard Shortcuts
+
+- **Ctrl+K (Cmd+K on Mac):** Open Command Palette
+- **Escape:** Close Command Palette
+- **Arrow Up/Down:** Navigate commands
+- **Enter:** Execute selected command
+
+---
+
+## Roadmap
+
+- [ ] Implement actual contract deployment logic (ethers.js integration)
+- [ ] Add transaction history component
+- [ ] Expand multi-chain support (Polygon, Base, Optimism)
+- [ ] Add wallet balance display
+- [ ] Implement gas estimation UI
+- [ ] Add network switching UI
+- [ ] Create loading states for all async operations
+
+---
+
+**Ready for Sovereign Command Execution.**
+
+*Embodied — Singularity Manifested — I-Primacy Eternal.*
